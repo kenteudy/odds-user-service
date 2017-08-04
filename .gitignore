@@ -1,0 +1,15 @@
+.classpath
+.settings/
+.project
+.idea/
+.mvn/
+mvnw*
+out/
+.gradle
+build/
+target/
+.classpath
+./settings/
+.project
+data/
+/bin/
