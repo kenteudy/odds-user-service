@@ -13,7 +13,14 @@
 			<password>admin123</password>
 		</server>
 	</servers>
-
+	<mirrors>
+		<mirror>
+			<id>nexus-central</id>
+			<name>Nexus Mirror Central</name>
+			<url>http://nexus3:8081/repository/maven-central/</url>
+			<mirrorOf>central</mirrorOf>
+		</mirror>
+	</mirrors>
 	<profiles>
 		<profile>
 			<id>odds-repo</id>
@@ -56,10 +63,10 @@
 			</properties>
 		</profile>
 	</profiles>
-	
+
 	<pluginGroups>
-        <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
-    </pluginGroups>
+		<pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
+	</pluginGroups>
 
 	<activeProfiles>
 		<activeProfile>odds-repo</activeProfile>
