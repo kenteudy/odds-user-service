@@ -8,7 +8,7 @@ def snapshot_release_number = "1.0-SNAPSHOT"
 def release_number
 def staging_build_job="odds-staging/odds-patient-service-staging"
 
-#println "Branch Name:" + BRANCH_NAME
+//println "Branch Name:" + BRANCH_NAME
 
 
 try {
