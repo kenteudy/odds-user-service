@@ -16,7 +16,7 @@ try {
       node("maven") {
         stage("Initialize") {
         }
-                  stage("Checkout") {
+        stage("Checkout") {
           //git url: "${GIT_SOURCE_URL}", branch: "${GIT_SOURCE_REF}", credentialsId: "odds-development-${GIT_SOURCE_SECRET}"
           //git url: "${GIT_SOURCE_URL}", branch: "${GIT_SOURCE_REF}"
           checkout scm
@@ -39,7 +39,7 @@ try {
         stage("Build Image") {
           unstash name:"jar" 
           sh "oc start-build ${app_name}-docker --from-file=${app_name}.jar -n ${project}"
-          openshiftVerifyBuild bldCfg: '${app_name}-docker', waitTime: '20', waitUnit: 'min', namespace: '${project}'
+          openshiftVerifyBuild bldCfg: ${app_name} + '-docker', waitTime: '20', waitUnit: 'min', namespace: ${project}
         }
         stage("Deploy") {
           openshiftDeploy(deploymentConfig: '${app_name}', namespace: '${project}')
