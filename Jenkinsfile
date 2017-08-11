@@ -1,7 +1,7 @@
 echo "Build Number ${BUILD_NUMBER}"
 //def project
 def project="odds-development"
-def app_name="user-service"
+def app_name="odds-user-service"
 def image_tag="v1.${BUILD_NUMBER}"
 
 def snapshot_release_number = "1.0-SNAPSHOT"
