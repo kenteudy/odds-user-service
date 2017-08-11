@@ -1,7 +1,7 @@
 echo "Build Number ${BUILD_NUMBER}"
-def ocp_project
-def image_project
-def app_name="patient-service"
+def project
+def project="odds-development"
+def app_name="user-service"
 def image_tag="v1.${BUILD_NUMBER}"
 
 def snapshot_release_number = "1.0-SNAPSHOT"
@@ -24,8 +24,8 @@ try {
         }
         stage("Build Jar") {
           sh "mvn -s configuration/settings.xml clean install"
-          sh "cp target/*.jar ${APP_NAME}.jar"
-          stash name:"jar", includes:" ${APP_NAME}.jar"
+          sh "cp target/*.jar ${app_name}.jar"
+          stash name:"jar", includes:" ${app_name}.jar"
           junit 'target/surefire-reports/*.xml'
         }
         stage('SonarQube analysis') {
@@ -38,11 +38,11 @@ try {
       node {
         stage("Build Image") {
           unstash name:"jar" 
-          sh "oc start-build ${APP_NAME}-docker --from-file=${APP_NAME}.jar -n ${PROJECT}"
-          openshiftVerifyBuild bldCfg: '${APP_NAME}-docker', waitTime: '20', waitUnit: 'min', namespace: '${PROJECT}'
+          sh "oc start-build ${app_name}-docker --from-file=${app_name}.jar -n ${project}"
+          openshiftVerifyBuild bldCfg: '${app_name}-docker', waitTime: '20', waitUnit: 'min', namespace: '${project}'
         }
         stage("Deploy") {
-          openshiftDeploy(deploymentConfig: '${APP_NAME}', namespace: '${PROJECT}')
+          openshiftDeploy(deploymentConfig: '${app_name}', namespace: '${project}')
         }
       }
    }
